@@ -1,12 +1,16 @@
 package br.unirio.bsi.pm.optimalpathfinder;
 
+/**
+ * App launcher: Loads a bare bones interface to a track file
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 import br.unirio.bsi.pm.optimalpathfinder.model.MapRenderer;
 
-public class App {
+public class AppLauncher {
 
 	public static void main(String s[]) throws Exception {
 

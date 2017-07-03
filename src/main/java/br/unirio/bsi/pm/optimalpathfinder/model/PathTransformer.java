@@ -2,25 +2,41 @@ package br.unirio.bsi.pm.optimalpathfinder.model;
 
 import java.util.ArrayList;
 
+/**
+ * Reads an ArrayList of coordinates and returns and ArrayList of moves needed
+ * to generate the given path
+ * 
+ * @param path
+ * @return
+ */
+
 public class PathTransformer {
 
 	ArrayList<Coordinate2D> coordinatesPath;
-	int[] movesRaw;
-	int[] movesAdjusted;
+	ArrayList<Integer> movesRaw;
+	ArrayList<Integer> movesAdjusted;
 
-	public PathTransformer(int size) {
+	public PathTransformer() {
 
 		coordinatesPath = new ArrayList<Coordinate2D>();
-		movesRaw = new int[size];
-		movesAdjusted = new int[size];
+		movesRaw = new ArrayList<Integer>();
+		movesAdjusted = new ArrayList<Integer>();
 
 	}
 
-	public int[] coordinatesToMoves(ArrayList<Coordinate2D> path) {
+	/**
+	 * Reads an ArrayList of coordinates and returns and ArrayList of moves
+	 * needed to generate the given path
+	 * 
+	 * @param path
+	 * @return
+	 */
 
-		for (int i = 0; i < path.size() - 2; i++) {
+	public ArrayList<Integer> coordinatesToMoves(ArrayList<Coordinate2D> path) {
 
-			movesRaw[i] = transform(path.get(i), path.get(i + 1));
+		for (int i = 0; i < path.size() - 1; i++) {
+
+			movesRaw.add(transform(path.get(i), path.get(i + 1)));
 		}
 
 		adjust();
@@ -30,13 +46,13 @@ public class PathTransformer {
 	}
 
 	/**
-	 * Translates the movement between 2 coordinates to a numpad input,
-	 * ***ignoring speed***
+	 * Translates the movement between 2 coordinates to a numPad input, ignoring
+	 * speed
 	 * 
 	 * @param c1
-	 *            - Coordinate 1 (from)
+	 *            Coordinate 1 (from)
 	 * @param c2
-	 *            - Coordinate 2 (to)
+	 *            Coordinate 2 (to)
 	 * @return the corresponding player input
 	 */
 
@@ -56,20 +72,20 @@ public class PathTransformer {
 
 	public void adjust() {
 
-		movesAdjusted[0] = movesRaw[0];
+		movesAdjusted.add(movesRaw.get(0));
 
-		int detour = movesRaw[0];
+		int detour = movesRaw.get(0);
 
-		for (int i = 1; i < movesRaw.length; i++) {
+		for (int i = 1; i < movesRaw.size(); i++) {
 
-			if (movesRaw[i] == movesRaw[i - 1]) {
+			if (movesRaw.get(i) == movesRaw.get(i - 1)) {
 
-				movesAdjusted[i] = 5;
+				movesAdjusted.add(i, 5);
 
 			} else {
 
-				movesAdjusted[i] = movesRaw[i] + (detour - 5) * (-1);
-				detour = movesRaw[i];
+				movesAdjusted.add(i, movesRaw.get(i) + (detour - 5) * (-1));
+				detour = movesRaw.get(i);
 
 			}
 

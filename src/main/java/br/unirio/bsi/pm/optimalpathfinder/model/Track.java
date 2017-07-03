@@ -199,5 +199,5 @@ public class Track {
 	public int getNumberOfCheckPoints() {
 		return this.checkpoints.size();
 	}
-	
+
 }

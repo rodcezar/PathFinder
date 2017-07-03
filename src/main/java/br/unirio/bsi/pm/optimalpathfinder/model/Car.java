@@ -3,6 +3,7 @@ package br.unirio.bsi.pm.optimalpathfinder.model;
 /**
  * Class that represents the moving unit on the map. 
  * 
+ * 
  * @author Rodrigo
  */
 
@@ -12,32 +13,55 @@ import br.unirio.bsi.pm.optimalpathfinder.model.Coordinate2D;
 
 public class Car {
 
-	private ArrayList<Coordinate2D> positionStack; // keeps a history of car
-													// positions
-	private ArrayList<Coordinate2D> speedStack; // keeps a history of the speed
-												// at a given position index.
+	/**
+	 * keeps a history of car positions (Coordinates)
+	 */
+	private ArrayList<Coordinate2D> positionStack;
 
-	private int[] playerMoves; // Keeps a history of numpad moves
+	/**
+	 * keeps a history of the speed state at a given position index
+	 */
+	private ArrayList<Coordinate2D> speedStack;
+
+	/**
+	 * Keeps a history of numpad moves
+	 */
+	private ArrayList<Integer> playerMoves;
 
 	public Car() {
 
 		positionStack = new ArrayList<Coordinate2D>();
 		speedStack = new ArrayList<Coordinate2D>();
-		playerMoves = new int[1000];
+		playerMoves = new ArrayList<Integer>();
 	}
+
+	/**
+	 * add a position to the car positionStack
+	 * 
+	 */
 
 	public void addPosition(Coordinate2D position) {
 		this.positionStack.add(position);
 	}
 
+	/**
+	 * add a speed state to the car positionStack
+	 * 
+	 */
 	public void addSpeed(Coordinate2D speed) {
 		this.speedStack.add(speed);
 	}
 
+	/**
+	 * Get the car current position
+	 */
 	public Coordinate2D getCurrentPosition() {
 		return positionStack.get(this.positionStack.size() - 1);
 	}
 
+	/**
+	 * Get the car position (a coordinate) at a given array index
+	 */
 	public Coordinate2D getPositionAtIndex(int index) {
 		return positionStack.get(index);
 	}
@@ -64,9 +88,13 @@ public class Car {
 		addPosition(nextPosition);
 	}
 
+	/**
+	 * Clear history
+	 */
 	public void reset() {
 		this.positionStack.clear();
 		this.speedStack.clear();
+		this.playerMoves.clear();
 	}
 
 	/**
@@ -90,8 +118,8 @@ public class Car {
 
 	/**
 	 * Returns the car's next position considering no speed change. This is used
-	 * to draw the next move circle grid. Note that this method doesn't add a
-	 * new position to the car
+	 * to draw the next move blue circles grid. Note that, unlike the
+	 * moveNext(), this method doesn't add a new position to the car
 	 */
 
 	public Coordinate2D getNextMove() {
@@ -111,9 +139,19 @@ public class Car {
 		return nextMove;
 	}
 
+	/**
+	 * @return the car coordinate (position) at a given index in the
+	 *         positionStack
+	 * 
+	 */
 	public int getCurrentPositionIndex() {
 		return this.positionStack.size();
 	}
+
+	/**
+	 * 
+	 * @return an array of all car positions
+	 */
 
 	public ArrayList<Coordinate2D> getPositions() {
 		return this.positionStack;
@@ -121,7 +159,7 @@ public class Car {
 
 	/**
 	 * Set the car's current speed to zero. This is used when the car is moved
-	 * with path finder.
+	 * with the pathFinder.
 	 */
 	public void brake() {
 		int speedIndex = this.speedStack.size() - 1;
@@ -129,30 +167,65 @@ public class Car {
 		this.speedStack.get(speedIndex).setY(0);
 	}
 
-	public void setMoves(int[] moves) {
+	/**
+	 * Loads the playerMoves arrayList with a list of player inputs. This is
+	 * used when the car is moved with the pathFinder
+	 */
+	public void setMoves(ArrayList<Integer> moves) {
 
 		playerMoves = moves;
 
 	}
 
-	public int[] getMoves() {
+	/**
+	 * 
+	 * @return the list of playerMoves required to produce the car's current
+	 *         path
+	 */
+	public ArrayList<Integer> getMoves() {
 
 		return playerMoves;
 
 	}
 
-	public void setMoveAtIndex(int index, int move) {
+	/**
+	 * Add a numeric keyboard input to the playerMoves ArrayList, at a given
+	 * index
+	 * 
+	 * @param index
+	 * @param move
+	 */
+	public void setMoveAtIndex(int index, Integer move) {
 
-		playerMoves[index] = move;
+		playerMoves.add(index, move);
 
 	}
-	
+
+	/**
+	 * Add a move (numeric keyboard input) to the end of playerMoves ArrayList
+	 * 
+	 * @param move
+	 */
+	public void addMove(Integer move) {
+
+		playerMoves.add(move);
+
+	}
+
+	/**
+	 * Return the move done at a given index
+	 * @param index
+	 * @return
+	 */
 	public int getMoveAtIndex(int index) {
 
-		return playerMoves[index];
+		return playerMoves.get(index);
 
 	}
-	
+	/**
+	 * 
+	 * @return the number of moves the car did up to the moment
+	 */
 	public int getNumberOfMoves() {
 
 		return this.getPositions().size() - 2;

@@ -183,8 +183,6 @@ public class PathFinder {
 	/**
 	 * This class (Node) is analog to the TrackPoint to the track map.
 	 * 
-	 * @author Rodrigo Cezar
-	 *
 	 */
 
 	private class Node implements Comparable<Object> {

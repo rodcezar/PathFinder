@@ -392,8 +392,8 @@ public class MapRenderer extends Component implements ActionListener {
 			if (pathButtonPressed) {
 				big.setColor(Color.BLUE);
 				big.setFont(new Font("CourierNew", Font.PLAIN, 36));
-				big.drawString(Integer.toString(car.getMoveAtIndex(i)), carPositions.get(i).getY() - 10,
-						carPositions.get(i).getX() - 10);
+				big.drawString(Integer.toString(car.getMoveAtIndex(i - 1)), carPositions.get(i - 1).getY() - 10,
+						carPositions.get(i - 1).getX() - 10);
 			}
 
 		}
@@ -517,7 +517,7 @@ public class MapRenderer extends Component implements ActionListener {
 
 		// Convert the pathfinder output to player moves
 
-		PathTransformer pt = new PathTransformer(car.getPositions().size());
+		PathTransformer pt = new PathTransformer();
 		pathButtonPressed = true;
 		car.setMoves(pt.coordinatesToMoves(car.getPositions()));
 
@@ -609,6 +609,7 @@ public class MapRenderer extends Component implements ActionListener {
 
 			for (int i = 0; i < jbnButtons.length; i++) {
 				if (e.getSource() == jbnButtons[i]) {
+					car.addMove(i + 1);
 					drawNewFrame(i + 1); // because button 1 has index 0
 					repaint();
 				}
@@ -623,6 +624,7 @@ public class MapRenderer extends Component implements ActionListener {
 			if (cb.getActionCommand().equals("SetTrack")) {
 				setTrackIndex(cb.getSelectedIndex());
 				try {
+					pathButtonPressed = false;
 					this.loadMap();
 				} catch (Exception e1) {
 					e1.printStackTrace();

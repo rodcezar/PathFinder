@@ -12,7 +12,7 @@ import br.unirio.bsi.pm.optimalpathfinder.model.PathFinder;
 import br.unirio.bsi.pm.optimalpathfinder.model.Track;
 import br.unirio.bsi.pm.optimalpathfinder.xml.TrackParser;
 
-public class TrackTest {
+public class PathFinderTest {
 
 	@Test
 	public void testLoadTrackBE() throws Exception {

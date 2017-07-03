@@ -17,7 +17,7 @@ import br.unirio.bsi.pm.optimalpathfinder.model.Track;
 
 public class TrackParser {
 	/**
-	 * Importa uma pista em formato TRK de um arquivo
+	 * Loads a track XML into a track object
 	 */
 	public Track loadFromFile(String countryCode) throws Exception {
 		String filename = "data/tracks/";
