@@ -11,49 +11,41 @@ public class TrackPoint {
 	private boolean checkpoint;
 	private boolean valid;
 	private int checkpointIndex;
-		
-	public TrackPoint(boolean checkpoint, boolean valid)
-	{
+
+	public TrackPoint(boolean checkpoint, boolean valid) {
 		this.checkpoint = checkpoint;
 		this.valid = valid;
 		this.checkpointIndex = 0;
 	}
-	
-	public TrackPoint(boolean checkpoint, boolean valid, int checkpointIndex)
-	{
+
+	public TrackPoint(boolean checkpoint, boolean valid, int checkpointIndex) {
 		this.checkpoint = checkpoint;
 		this.valid = valid;
 		this.checkpointIndex = checkpointIndex;
 	}
-	
-	public boolean isCheckpoint()
-	{
+
+	public boolean isCheckpoint() {
 		return checkpoint;
 	}
-	
-	public void setCheckPoint(boolean checkPoint)
-	{
+
+	public void setCheckPoint(boolean checkPoint) {
 		this.checkpoint = checkPoint;
 	}
-	
-	public boolean isValid()
-	{
+
+	public boolean isValid() {
 		return valid;
 	}
-	
-	public void setValid(boolean valid)
-	{
+
+	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
-	
-	public void setCheckpointIndex(int index)
-	{
+
+	public void setCheckpointIndex(int index) {
 		this.checkpointIndex = index;
 	}
-	
-	public int getCheckpointIndex()
-	{
+
+	public int getCheckpointIndex() {
 		return this.checkpointIndex;
 	}
-	
+
 }
