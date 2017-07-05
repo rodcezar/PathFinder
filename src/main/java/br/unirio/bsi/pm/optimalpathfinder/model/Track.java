@@ -53,8 +53,6 @@ public class Track {
 
 	/**
 	 * Get the number of rows (height) of this track
-	 * 
-	 * @return
 	 */
 	public int getRows() {
 		return rows;
@@ -62,8 +60,6 @@ public class Track {
 
 	/**
 	 * Set the number of rows (height) of this track
-	 * 
-	 * @return
 	 */
 	public void setRows(int rows) {
 		this.rows = rows;
@@ -71,8 +67,6 @@ public class Track {
 
 	/**
 	 * Get the number of columns (width) of this track
-	 * 
-	 * @return
 	 */
 	public int getColumns() {
 		return columns;

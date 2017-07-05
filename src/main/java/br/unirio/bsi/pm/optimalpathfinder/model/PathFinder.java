@@ -33,12 +33,8 @@ public class PathFinder {
 
 	/**
 	 * Creates a new path finder
-	 * 
-	 * @param trackCode
-	 *            - The code of the track to be loaded
-	 * @param maxSearchDistance
-	 *            - The max distance we want to search before giving up
-	 * @throws Exception
+	 * @param trackCode - The code of the track to be loaded
+	 * @param maxSearchDistance - The max distance we want to search before giving up
 	 */
 	public PathFinder(String trackCode, int maxSearchDistance) throws Exception {
 
@@ -68,10 +64,8 @@ public class PathFinder {
 	/**
 	 * Calculates the best path from a source to a target
 	 * 
-	 * @param source
-	 *            - Source coordinate
-	 * @param target
-	 *            - target coordinate
+	 * @param Source coordinate
+	 * @param Target coordinate
 	 * @return path - An array of coordinates containing the shortest path
 	 */
 	public ArrayList<Coordinate2D> calculatePath(Coordinate2D source, Coordinate2D target) {
@@ -118,6 +112,7 @@ public class PathFinder {
 							&& (candidateNode.y < track.getColumns())) {
 
 						if (!map[candidateNode.x][candidateNode.y].isBlocked()) {
+
 							int checkPointDistance = getDistance(candidateNode, targetNode); // depth
 							int sourceDistance = getDistance(sourceNode, candidateNode); // cost
 							int nextStepCost = sourceDistance + checkPointDistance;
@@ -131,9 +126,7 @@ public class PathFinder {
 								if (inClosedList(neighbor)) {
 									removeFromClosed(neighbor);
 								}
-
 							}
-
 							if (!inOpenList(neighbor) && !(inClosedList(neighbor))) {
 								neighbor.cost = nextStepCost;
 								neighbor.depth = sourceDistance;
@@ -144,7 +137,6 @@ public class PathFinder {
 					}
 				}
 			}
-
 		}
 
 		// This means the target node could not be reached, return null
@@ -171,20 +163,15 @@ public class PathFinder {
 	 * Calculate the distance between to points using the "Manhattan distance".
 	 * This is heuristic and gives an approximate distance.
 	 */
-
 	public int getDistance(Node source, Node target) {
-
 		int deltax = Math.abs(target.x - source.x);
 		int deltay = Math.abs(target.y - source.y);
-
 		return deltax + deltay;
 	}
 
 	/**
 	 * This class (Node) is analog to the TrackPoint to the track map.
-	 * 
 	 */
-
 	private class Node implements Comparable<Object> {
 		/** The x coordinate of the node */
 		private int x;
@@ -207,11 +194,6 @@ public class PathFinder {
 
 		/**
 		 * Create a new node
-		 * 
-		 * @param x
-		 *            The x coordinate of the node
-		 * @param y
-		 *            The y coordinate of the node
 		 */
 		public Node(int x, int y) {
 			this.x = x;
@@ -242,9 +224,7 @@ public class PathFinder {
 
 		/**
 		 * Set the parent of this node
-		 * 
-		 * @param parent
-		 *            The parent node which lead us to this node
+		 * @param parent - The parent node which lead us to this node
 		 * @return The depth we have no reached in searching
 		 */
 		public int setParent(Node parent) {
@@ -276,7 +256,6 @@ public class PathFinder {
 
 	/**
 	 * A simple sorted list
-	 *
 	 */
 	private class SortedList {
 		/** The list of elements */
@@ -285,8 +264,6 @@ public class PathFinder {
 
 		/**
 		 * Retrieve the first element from the list
-		 * 
-		 * @return The first element from the list
 		 */
 		public Object first() {
 			return list.get(0);
@@ -301,9 +278,6 @@ public class PathFinder {
 
 		/**
 		 * Add an element to the list - causes sorting
-		 * 
-		 * @param o
-		 *            The element to add
 		 */
 		@SuppressWarnings("unchecked")
 		public void add(Object o) {
@@ -313,9 +287,6 @@ public class PathFinder {
 
 		/**
 		 * Remove an element from the list
-		 * 
-		 * @param o
-		 *            The element to remove
 		 */
 		public void remove(Object o) {
 			list.remove(o);
@@ -323,8 +294,6 @@ public class PathFinder {
 
 		/**
 		 * Get the number of elements in the list
-		 * 
-		 * @return The number of element in the list
 		 */
 		public int size() {
 			return list.size();
@@ -332,10 +301,6 @@ public class PathFinder {
 
 		/**
 		 * Check if an element is in the list
-		 * 
-		 * @param o
-		 *            The element to search for
-		 * @return True if the element is in the list
 		 */
 		public boolean contains(Object o) {
 			return list.contains(o);
@@ -345,8 +310,6 @@ public class PathFinder {
 	/**
 	 * Get the first element from the open list. This is the next one to be
 	 * searched.
-	 * 
-	 * @return The first element in the open list
 	 */
 	protected Node getFirstInOpen() {
 		return (Node) open.first();
@@ -354,10 +317,6 @@ public class PathFinder {
 
 	/**
 	 * Check if a node is in the open list
-	 * 
-	 * @param node
-	 *            The node to check for
-	 * @return True if the node given is in the open list
 	 */
 	protected boolean inOpenList(Node node) {
 		return open.contains(node);
@@ -365,9 +324,6 @@ public class PathFinder {
 
 	/**
 	 * Remove a node from the open list
-	 * 
-	 * @param node
-	 *            The node to remove from the open list
 	 */
 	protected void removeFromOpen(Node node) {
 		open.remove(node);
@@ -375,9 +331,6 @@ public class PathFinder {
 
 	/**
 	 * Add a node to the closed list
-	 * 
-	 * @param node
-	 *            The node to add to the closed list
 	 */
 	protected void addToClosed(Node node) {
 		closed.add(node);
@@ -385,10 +338,6 @@ public class PathFinder {
 
 	/**
 	 * Check if the node supplied is in the closed list
-	 * 
-	 * @param node
-	 *            The node to search for
-	 * @return True if the node specified is in the closed list
 	 */
 	protected boolean inClosedList(Node node) {
 		return closed.contains(node);
@@ -396,9 +345,6 @@ public class PathFinder {
 
 	/**
 	 * Remove a node from the closed list
-	 * 
-	 * @param node
-	 *            The node to remove from the closed list
 	 */
 	protected void removeFromClosed(Node node) {
 		closed.remove(node);

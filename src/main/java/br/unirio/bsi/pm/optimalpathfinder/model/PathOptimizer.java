@@ -1,5 +1,9 @@
 package br.unirio.bsi.pm.optimalpathfinder.model;
 
+/**
+ * UNFINISHED
+ */
+
 import java.util.ArrayList;
 
 public class PathOptimizer {
@@ -50,6 +54,8 @@ public class PathOptimizer {
 
 	public void removeNodes(int begin, int end) {
 
+		// 
+		
 		int delta = end - begin;
 		int divisionResult = delta;
 		int factorX = 0, factorY = 1;

@@ -564,33 +564,23 @@ public class MapRenderer extends Component implements ActionListener {
 	}
 
 	public JPanel getJbuttons() {
-
 		return jplButtons;
-
 	}
 
 	public JPanel getPFJbutton() {
-
 		return jplPFButton;
-
 	}
 
 	public JComboBox<String> getChoices() {
-
 		return choices;
-
 	}
 
 	public JComboBox<String> getJcbformats() {
-
 		return jcbformats;
-
 	}
 
 	public JLabel getMovesLabel() {
-
 		return movesCounter;
-
 	}
 
 	/**

@@ -18,6 +18,9 @@ public class TrackPoint {
 		this.checkpointIndex = 0;
 	}
 
+	/**
+	 * This constructor is used to create a checkpoint
+	 */
 	public TrackPoint(boolean checkpoint, boolean valid, int checkpointIndex) {
 		this.checkpoint = checkpoint;
 		this.valid = valid;
